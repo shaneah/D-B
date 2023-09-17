@@ -1,0 +1,342 @@
+<aura:component controller="EnquiryController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="enquiryRecord" type="Object"/>
+    <aura:attribute name="tabs" type="Object[]" />
+    <aura:attribute name="picklistValue" type="String" />
+    <aura:attribute name="picklistOptions" type="List"/>
+    <aura:attribute name="selectedTabLabel" type="String" />
+    <aura:attribute name="isFourVisible" type="Boolean" default="false" />
+    <aura:attribute name="isFourVisible2" type="Boolean" default="false" />
+    <aura:attribute name="isFourVisible3" type="Boolean" default="false" />
+    <aura:attribute name="selectedTab" type="String" default = "Untouched" />
+    <aura:attribute name="selectedTabb" type="String"  />
+    <aura:attribute name="Untouched" type="String" />
+    <aura:attribute name="contactMade" type="String" />
+    <aura:attribute name="Status" type="String" />
+    <aura:attribute name="picklistVal" type="String" />
+    <aura:attribute name="quali" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="picklistFieldName" type="String"  />
+    <aura:attribute name="picklistFieldName1" type="String"  />
+    <aura:attribute name="tabSavedValue" type="String" default ="Attempt 3"  />
+    <aura:attribute name="noOfAttempts" type="Integer" default = "2"  />
+    <aura:attribute name="f1Comment" type="String" />
+    <aura:attribute name="f2Comment" type="String" />
+    <aura:attribute name="f3Comment" type="String" />
+    <aura:attribute name="booleanList" type="Boolean[]" default="[false,false,false,false,false,false,false,false,false,false,false,false,false]"/>
+    <aura:attribute name="TabList" type="List" default="['Attempt 1','Attempt 2','Attempt 3','Qualification','Unqualified','Qualified','Follow Up 1','Follow Up 2','Follow Up 3','Meeting Scheduled','Meeting Outcome','EOI/Cheque Collection','Booking Confirmed']"/>
+    <aura:attribute name="qualifiedTabList" type="List" default="[Qualified','Follow Up 1','Follow Up 2','Follow Up 3','Meeting Scheduled','Meeting Outcome','EOI/Cheque Collection','Booking Confirmed']"/>
+
+    <aura:attribute name="applyCustomStyle" type="Boolean" default="true" />
+    
+    <aura:attribute name="Tab1" type="Boolean" default="false" />
+    <aura:attribute name="Tab2" type="Boolean" default="false" />
+    <aura:attribute name="Tab3" type="Boolean" default="false" />
+    <aura:attribute name="Tab4" type="Boolean" default="false" />
+    <aura:attribute name="Tab5" type="Boolean" default="false" />
+    <aura:attribute name="Tab6" type="Boolean" default="false" />
+    <aura:attribute name="Tab7" type="Boolean" default="false" />
+    <aura:attribute name="Tab8" type="Boolean" default="false" />
+    <aura:attribute name="Tab9" type="Boolean" default="false" />
+    <aura:attribute name="Tab10" type="Boolean" default="false" />
+    <aura:attribute name="Tab11" type="Boolean" default="false" />
+    <aura:attribute name="Tab12" type="Boolean" default="false" />
+    <aura:attribute name="Tab13" type="Boolean" default="false" />
+    <aura:attribute name="CurrentUser" type="Object"/>
+    <force:recordData recordId="{!$SObjectType.CurrentUser.Id}"
+                      fields="Profile.Name"
+                      targetFields="{!v.CurrentUser}"/>
+    <div>
+        {!v.CurrentUser.Profile.Name}
+        
+    </div>
+    <div id = "test" class="{!v.CurrentUser.Profile.Name == 'PB Agent' ? 'testClass' : ''}" >
+        
+   <aura:if isTrue="{! v.isFourVisible}"  aura:id="tabparent1" >
+            <lightning:tabset variant="scoped"  selectedTabId="{!v.selectedTab}" aura:id="tabparent" >
+                
+                <lightning:tab label="Untouched" id="Untouched"  onactive="{!c.SelectedhandleTabSelect}">
+                    
+                    <!--  <lightning:select name="{!v.picklistFieldName}"
+                              onchange="{!c.handlePicklist}"
+                              value="{!v.picklistValue}"
+                              aura:id="picklistField"
+                              required="true">
+                <aura:iteration items="{!v.picklistOptions}" var="option">
+                    <option value="{!option}" text="{!option}" selected ="{!option  == 'No Anwser'}" />
+                </aura:iteration>
+            </lightning:select>
+            <br></br>
+            <lightning:button label="Save" onclick="{!c.savePicklist}" />-->
+                    
+                </lightning:tab>
+                <lightning:tab label="Lead Status" onactive="{!c.SelectedhandleTabSelect}" id="Lead Status"  >
+                    
+                    <lightning:select name="{!v.picklistFieldName}"
+                                      value="{!v.picklistValue}"
+                                      aura:id="picklistField"
+                                      required="true"
+                                      >
+                        <aura:iteration items="{!v.picklistOptions}" var="option">
+                            <option value="{!option}" text="{!option}"  />
+                        </aura:iteration>
+                    </lightning:select>
+                    <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                    
+                </lightning:tab>
+                <aura:if isTrue="{! v.Tab1 }" aura:id="tab1" >
+                    
+                    <lightning:tab  class="{!v.applyCustomStyle ? 'myCustomClass' : ''}" label="Attempt 1"  onactive="{!c.SelectedhandleTabSelect}" id="Attempt 1" aura:id="tab1234"  >
+                        
+                        <lightning:select name="{!v.picklistFieldName}"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}"  />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                        
+                    </lightning:tab>
+                    
+                </aura:if>
+                <!--<lightning:tab label="ATTEMPT 1" onactive="{!c.SelectedhandleTabSelect}" id="ATTEMPT 1"  >
+            
+            <lightning:select name="{!v.picklistFieldName}"
+                              value="{!v.picklistValue}"
+                              aura:id="picklistField"
+                              required="true"
+                              >
+                <aura:iteration items="{!v.picklistOptions}" var="option">
+                    <option value="{!option}" text="{!option}"  />
+                </aura:iteration>
+            </lightning:select>
+            <lightning:button label="Save" onclick="{!c.savePicklist}" />
+            
+        </lightning:tab>-->
+                <!-- <aura:if isTrue="{! v.isFourVisible2 }">-->
+                <aura:if isTrue="{! v.Tab2}" >
+                    
+                    <lightning:tab label="Attempt 2" onactive="{!c.SelectedhandleTabSelect}" id="Attempt 2"  >
+                        
+                        <lightning:select name="{!v.picklistFieldName}"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}"  />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                        
+                    </lightning:tab>
+                </aura:if>
+                
+                <aura:if isTrue="{! v.Tab3 }">
+                    <lightning:tab label="Attempt 3" onactive="{!c.SelectedhandleTabSelect}" id="Attempt 3"  >
+                        
+                        <lightning:select name="{!v.picklistFieldName}"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}"  />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                        
+                    </lightning:tab>
+                </aura:if> 
+                <!--<aura:if isTrue="{! v.Tab4 }">
+                <lightning:tab label="Contact Made" onactive="{!c.SelectedhandleTabSelect}" id="Contact Made"  >
+                    
+                    <lightning:select name="{!v.picklistFieldName}"
+                                      value="{!v.picklistValue}"
+                                      aura:id="picklistField"
+                                      required="true"
+                                      >
+                        <aura:iteration items="{!v.picklistOptions}" var="option">
+                            <option value="{!option}" text="{!option}"  />
+                        </aura:iteration>
+                    </lightning:select>
+                    <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                    
+                </lightning:tab>
+            </aura:if> -->
+                <aura:if isTrue="{! v.Tab4 }">
+                    <lightning:tab label="Qualification" id="Qualification" onactive="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true">
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab5 }">
+                    <lightning:tab label="Unqualified" id="Unqualified" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab6 }">
+                    
+                    <lightning:tab label="Qualified" id="Qualified" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab7 }">
+                    
+                    <lightning:tab label="Follow Up 1" id="Follow Up 1" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:input label="Follow Up 1 Comment" aura:id="f1Comment" value="{!v.f1Comment}"/>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab8 }">
+                    
+                    <lightning:tab label="Follow Up 2" id="Follow Up 2" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:input label="Follow Up 2 Comment" value="{!v.f2Comment}"/>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab9 }">
+                    
+                    <lightning:tab label="Follow Up 3" id="Follow Up 3" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:input label="Follow Up 3 Comment" value="{!v.f3Comment}"/>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab10 }">
+                    
+                    <lightning:tab label="Meeting Scheduled" id="Meeting Scheduled" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{! v.Tab11 }">
+                    <lightning:tab label="Meeting Outcome" id="Meeting Outcome" onactive ="{!c.SelectedhandleTabSelect}">
+                        <lightning:select name="picklistField"
+                                          value="{!v.picklistValue}"
+                                          aura:id="picklistField"
+                                          
+                                          required="true"
+                                          >
+                            <aura:iteration items="{!v.picklistOptions}" var="option">
+                                <option value="{!option}" text="{!option}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />                
+                    </lightning:tab>
+                </aura:if>
+                
+                <aura:if isTrue="{! v.Ta12 }">        
+                    <lightning:tab label="EOI/Cheque Collection" id="EOI/Cheque Collection">
+                        <lightning:input label="EOI/Cheque Collection" aura:id="inputField"/>
+                        
+                        
+                        <lightning:select name="select1" label="Currency" aura:id="dropdownField">
+                            
+                            <option value="AED"> AED </option>
+                            <option value="USD"> USD </option>
+                            <option value="EUR"> EUR </option>
+                            
+                            
+                        </lightning:select>
+                        
+                        
+                        <lightning:textarea aura:id="output" label="Note For EOI" value="{!v.textAreaValue}"/>
+                        
+                        
+                        <lightning:button label="Save" onclick="{!c.savePicklist}"/>                  
+                        <!--<lightning:recordEditForm objectApiName="pba__Request__c"
+                                         >
+                <lightning:messages />
+                <lightning:inputField aura:id="eoicollection" Label="EOI_Collection__c" />
+                 <lightning:select name="select1" label="EOI Currency" aura:id="eoicollectiondropdown" required="true">
+                     <option value="">Choose Currency...</option>
+                     <option value="1">AED</option>
+                     <option value="2">USD</option>
+                     <option value="3">PKR</option>
+                 
+                        </lightning:select>
+                        <lightning:button label="Save" onclick="{!c.savePicklist}" />  
+            </lightning:recordEditForm>-->
+                        
+                    </lightning:tab>
+                    
+                </aura:if>
+                
+                <aura:if isTrue="{! v.Tab13 }">
+                    <lightning:tab label="Booking Confirmed" id="Booking Confirmed">
+                        <p><b>Booking Confirmed</b></p>               
+                    </lightning:tab>
+                </aura:if>
+            </lightning:tabset>
+    </aura:if> 
+    </div>
+    </aura:component>

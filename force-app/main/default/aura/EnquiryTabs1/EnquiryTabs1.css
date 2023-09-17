@@ -1,0 +1,93 @@
+/* Disable all tabs except "Untouched," "Lead Status," and "Attempt 1" when the current tab is not one of them */
+.THIS.testClass ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item:not(.slds-is-active) {
+     pointer-events: none !important; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+
+ /*Ensure the current active tab is always active */
+.THIS.testClass ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item.slds-is-active {
+    pointer-events: auto !important;  
+    opacity: 1; 
+    cursor: auto;
+}
+
+/*worrks*/
+
+
+/*
+.THIS .slds-tabs_scoped__item[title="Attempt 1"] {
+background-color:red !important;
+
+}*/
+/*
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item:not(.slds-is-active):not([title="Lead Status"]):not([title="Untouched"]) {
+    pointer-events: none !important; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+*/
+/*
+ * /* Disable all tabs except "Untouched," "Lead Status," and "Attempt 1" when the current tab is not one of them 
+
+ .THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item:not([title="Untouched"]):not(.slds-is-active) {
+    pointer-events: none !important; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+*/
+
+
+
+
+
+
+
+
+/* Disable "Untouched," "Lead Status," and "Attempt 1" tabs if the current tab is anything other than these three 
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Untouched"]:not(.slds-is-active),
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Lead Status"]:not(.slds-is-active),
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Attempt 1"]:not(.slds-is-active),
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Attempt 2"]:not(.slds-is-active),
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Attempt 3"]:not(.slds-is-active){
+    pointer-events: none !important; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+
+/* Ensure the current active tab is always active 
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item.slds-is-active {
+    pointer-events: auto !important; /* Enable pointer events for the active tab 
+    opacity: 1; /* Set opacity to 1 for the active tab 
+    cursor: auto; /* Set cursor to the default cursor for the active tab 
+}
+
+*//* Disable "Lead Status" tab by default */
+/* Disable "Lead Status" tab by default */
+/* Disable the link within "Lead Status" tab by default */
+
+
+
+
+
+/*
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item:not(.slds-is-active) {
+    pointer-events: none !important; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+
+
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item:not([title="Attempt 1"]) {
+    pointer-events: none !important;
+    opacity: 0.5;
+    cursor: not-allowed;
+}*/
+
+/* 
+.THIS ul.slds-tabs_scoped__nav > li.slds-tabs_scoped__item[title="Attempt 1"] + li.slds-tabs_scoped__item[title="Lead Status"] {
+    pointer-events: auto !important;
+    opacity: 1; 
+    cursor: pointer;
+}
+*/
